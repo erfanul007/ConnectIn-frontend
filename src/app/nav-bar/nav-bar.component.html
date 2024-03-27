@@ -1,0 +1,13 @@
+<mat-toolbar color="primary" class="mat-elevation-z4">
+  <mat-icon>polymer</mat-icon>
+  <span class="margin-left-s">{{brandName}}</span>
+  <div class="nav-spacer"></div>
+  <div *ngIf="loggedIn; then thenBlock else elseBlock"></div>
+  <ng-template #thenBlock>
+    <a mat-button>LoggedIn</a>
+  </ng-template>
+  <ng-template #elseBlock>
+    <a mat-raised-button>Login</a>
+    <a mat-raised-button class="margin-left" color="accent">Signup</a>
+  </ng-template>
+</mat-toolbar>
