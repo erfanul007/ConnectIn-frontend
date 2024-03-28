@@ -1,0 +1,30 @@
+<div fxLayoutAlign="center" class="login-div">
+  <mat-card fxFlex="25">
+    <mat-toolbar color="primary" fxLayoutAlign="center center">Welcome to ConnectIn</mat-toolbar>
+
+    <form (ngSubmit)="onSubmit()" name="loginform" [formGroup]="loginform" fxLayoutAlign="stretch" fxLayout="column" class="padding-inside">
+      <mat-form-field>
+        <mat-label>Enter your Username</mat-label>
+        <input formControlName="username" matInput required>
+        <mat-icon matTextSuffix="">person</mat-icon>
+        <mat-error *ngIf="loginform.get('username')?.errors?.['required']">
+          Username is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Enter your Password</mat-label>
+        <input formControlName="password" matInput [type]="hidePassWord ? 'password' : 'text'" required>
+        <button type="button" mat-icon-button matSuffix (click)="hidePassWord = !hidePassWord" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassWord">
+          <mat-icon>{{hidePassWord ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="loginform.get('password')?.errors?.['required']">
+          Password is required
+        </mat-error>
+      </mat-form-field>
+
+      <mat-error *ngIf="loginError" fxLayoutAlign="center">Username or Password is incorrect. Try again.</mat-error>
+      <button type="submit" mat-raised-button color="primary" class="login-btn">Login</button>
+    </form>
+  </mat-card>
+</div>

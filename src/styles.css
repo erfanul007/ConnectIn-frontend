@@ -11,3 +11,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin-left: 0.5em;
 }
 
+.padding-inside{
+  padding: 2em;
+}
+
+.pointer{
+  cursor: pointer;
+}
