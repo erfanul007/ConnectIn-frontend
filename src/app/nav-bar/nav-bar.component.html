@@ -1,5 +1,5 @@
 <mat-toolbar color="primary" class="mat-elevation-z2">
-  <button mat-button routerLink="home">
+  <button mat-button routerLink="/">
     <mat-icon>polymer</mat-icon>
     <span class="home-btn">{{brandName}}</span>
   </button>
@@ -10,6 +10,6 @@
   </ng-template>
   <ng-template #elseBlock>
     <a mat-raised-button routerLink="login">Login</a>
-    <a mat-raised-button class="margin-left" color="accent">Signup</a>
+    <a mat-raised-button routerLink="signup" class="margin-left" color="accent">Signup</a>
   </ng-template>
 </mat-toolbar>

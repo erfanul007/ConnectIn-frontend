@@ -1,0 +1,113 @@
+<div fxLayoutAlign="center" class="signup-div">
+  <mat-card fxFlex="30">
+    <mat-toolbar color="primary" fxLayoutAlign="center center">Become a part of ConnectIn</mat-toolbar>
+
+    <form (ngSubmit)="onSubmit()" name="loginform" [formGroup]="signupform" fxLayoutAlign="stretch" fxLayout="column" class="padding-inside">
+
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <mat-form-field class="input-field">
+          <mat-label>First Name</mat-label>
+          <input formControlName="firstname" matInput required>
+          <mat-error *ngIf="signupform.get('firstname')?.errors?.['required']">
+            first name is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>Last Name</mat-label>
+          <input formControlName="lastname" matInput required>
+          <mat-error *ngIf="signupform.get('lastname')?.errors?.['required']">
+            last name is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <mat-form-field class="input-field">
+          <mat-label>Email</mat-label>
+          <input formControlName="email" matInput required>
+          <mat-icon matSuffix>email</mat-icon>
+          <mat-error *ngIf="signupform.get('email')?.errors?.['required']">
+            email is required
+          </mat-error>
+          <mat-error *ngIf="signupform.get('email')?.errors?.['email']">
+            must be a valid email
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>Username</mat-label>
+          <input formControlName="username" matInput required>
+          <mat-icon matSuffix>person</mat-icon>
+          <mat-error *ngIf="signupform.get('username')?.errors?.['required']">
+            username is required
+          </mat-error>
+          <mat-error *ngIf="signupform.get('username')?.errors?.['minlength']">
+            must be at least 4 characters long
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <mat-form-field class="input-field">
+          <mat-label>Date of Birth</mat-label>
+          <input formControlName="dateofbirth" matInput required [matDatepicker]="picker">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="signupform.get('dateofbirth')?.errors?.['required']">
+            date of birth is required
+          </mat-error>
+          <mat-hint>MM/DD/YYYY</mat-hint>
+        </mat-form-field>
+        
+        <mat-form-field class="input-field">
+          <mat-label>Gender</mat-label>
+          <mat-select formControlName="gender">
+            <mat-option *ngFor="let gender of genderOptions" [value]="gender">{{ gender }}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="signupform.get('gender')?.errors?.['required']">
+            gender is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayoutAlign="space-between">
+        <mat-form-field class="input-field">
+          <mat-label>Password</mat-label>
+          <input formControlName="password" matInput [type]="hidePassWord ? 'password' : 'text'" required>
+          <button type="button" mat-icon-button matSuffix (click)="hidePassWord = !hidePassWord" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassWord">
+            <mat-icon>{{hidePassWord ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="signupform.get('password')?.errors?.['required']">
+            password is required
+          </mat-error>
+          <mat-error *ngIf="signupform.get('password')?.errors?.['minlength']">
+            must be at least 4 characters long
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
+          <mat-label>Confirm Password</mat-label>
+          <input formControlName="repeatpassword" matInput [type]="hideConfirmPassWord ? 'password' : 'text'" required>
+          <button type="button" mat-icon-button matSuffix (click)="hideConfirmPassWord = !hideConfirmPassWord" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassWord">
+            <mat-icon>{{hideConfirmPassWord ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="signupform.get('repeatpassword')?.errors?.['required']">
+            confirm password is required
+          </mat-error>
+          <mat-error *ngIf="signupform.get('repeatpassword')?.errors?.['mismatch']">
+            password didn't match
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div fxLayoutAlign="center" fxLayout="column">
+        <mat-error *ngIf="signupError" fxLayoutAlign="center">Account already exist!</mat-error>
+        <button type="submit" mat-raised-button color="accent" class="margin-top" >Signup</button>
+        <div class="margin-top" fxLayoutAlign="center center">
+          Already have an account? <button mat-button routerLink="/login" class="link" color="primary">Login</button>
+        </div>
+      </div>
+      
+    </form>
+  </mat-card>
+</div>

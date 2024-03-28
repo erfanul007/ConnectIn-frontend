@@ -18,9 +18,12 @@ export class LoginComponent {
   }
 
   onSubmit(){
-    const username = this.loginform.get('username')?.value;
-    const password = this.loginform.get('password')?.value;
-    if(username === '' || password === '') return;
+    console.log(this.loginform.value);
+    if(this.loginform.valid != true){
+      return;
+    }
+    const username = this.loginform.value.username;
+    const password = this.loginform.value.password;
 
     // complete service logics
     this.loginError = true; // if failed

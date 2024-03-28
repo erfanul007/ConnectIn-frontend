@@ -4,10 +4,11 @@
   background-image: url(../../assets/landing-page-bg.jpg);
   background-size: cover;
   opacity: 90%;
+  position:fixed;
 }
 
 .branding-text{
-  color: wheat;
+  color: white;
   font-size: x-large;
   font-weight: 500;
   line-height: 1.5em;

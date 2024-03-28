@@ -1,5 +1,5 @@
 <div fxLayoutAlign="center" class="login-div">
-  <mat-card fxFlex="25">
+  <mat-card fxFlex="20">
     <mat-toolbar color="primary" fxLayoutAlign="center center">Welcome to ConnectIn</mat-toolbar>
 
     <form (ngSubmit)="onSubmit()" name="loginform" [formGroup]="loginform" fxLayoutAlign="stretch" fxLayout="column" class="padding-inside">
@@ -24,7 +24,10 @@
       </mat-form-field>
 
       <mat-error *ngIf="loginError" fxLayoutAlign="center">Username or Password is incorrect. Try again.</mat-error>
-      <button type="submit" mat-raised-button color="primary" class="login-btn">Login</button>
+      <button type="submit" mat-raised-button color="primary" class="margin-top">Login</button>
+      <div class="margin-top" fxLayoutAlign="center center">
+        Don't have an account? <button mat-button routerLink="/signup" class="link" color="primary">Signup</button>
+      </div>
     </form>
   </mat-card>
 </div>
