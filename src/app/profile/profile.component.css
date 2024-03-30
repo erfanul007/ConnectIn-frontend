@@ -1,0 +1,32 @@
+.cover-photo{
+  height: 15em;
+  object-fit: cover;
+  border-left: 0.5em solid wheat;
+  border-right: 0.5em solid wheat;
+  border-bottom: 0.5em solid wheat;
+  border-bottom-left-radius: 0.5em;
+  border-bottom-right-radius: 0.5em;
+}
+
+.profile-photo{
+  width: 10em;
+  height: 10em;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 0.5em solid wheat;
+  margin-top: -5em;
+}
+
+.profile-name{
+  font-size: x-large;
+  font-weight: bold;
+  margin-bottom: 0.25em;
+}
+
+.profile-heading {
+  margin: 2em;
+}
+
+.user-name{
+  font-family: monospace;
+}
