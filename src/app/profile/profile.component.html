@@ -1,26 +1,29 @@
 <div fxLayout="column" fxLayoutAlign="start center">
   <mat-card class="width-common" fxLayout="column">
-    <img src="{{user.coverphoto}}" onerror="this.onerror=null; this.src='../../assets/landing-page-bg.jpg'" class="cover-photo">
+    <img src="{{userheader.coverphoto}}" onerror="this.onerror=null; this.src='../../assets/landing-page-bg.jpg'" class="cover-photo">
     <div fxLayout="row" fxLayoutAlign="space-between center" class="profile-heading">
       <div fxLayout="row" fxLayoutAlign="space-between center">
-        <img src="{{user.profilepicture}}" onerror="this.onerror=null; this.src='../../assets/landing-page-bg.jpg'" class="profile-photo">
-
-        <div fxLayout="column" class="margin-left">
+        <img src="{{user.profilepic}}" onerror="this.onerror=null; this.src='../../assets/landing-page-bg.jpg'" class="profile-photo">
+        <div fxLayout="column" class="margin-left headline">
           <div class="profile-name">
             {{user.fname}} {{user.lname}}
           </div>
           <div class="user-name">
             @{{user.username}}
           </div>
+          <div>
+            {{user.headline}}
+          </div>
         </div>
       </div>
       <div fxLayout="row" fxLayoutAlign="end">
-        <button mat-raised-button color="accent">{{user.followers}} followers <mat-icon>people</mat-icon></button>
-        <button mat-raised-button class="margin-left-s" color="warn">{{user.following}} following <mat-icon>people_outline</mat-icon></button>
+        <button mat-raised-button color="accent">{{userheader.followers}} followers <mat-icon>people</mat-icon></button>
+        <button mat-raised-button class="margin-left-s" color="warn">{{userheader.following}} following <mat-icon>people_outline</mat-icon></button>
       </div>
     </div>
   </mat-card>
   <div class="margin-top width-common" fxLayout="row" fxLayoutAlign="space-between start">
-    <app-intro fxFlex="40"></app-intro>
+    <app-intro fxFlex="40" [userheader]="userheader"></app-intro>
+    <app-dashboard fxFlex class="margin-left"></app-dashboard>
   </div>
 </div>

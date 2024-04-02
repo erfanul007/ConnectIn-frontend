@@ -1,0 +1,10 @@
+<button mat-stroked-button [matMenuTriggerFor]="beforeMenu" class="user-menu-btn">
+  erfanul007
+  <mat-icon matSuffix>arrow_drop_down_circle</mat-icon>
+</button>
+<mat-menu #beforeMenu="matMenu" xPosition="before" class="user-menu-body">
+  <button mat-menu-item><mat-icon>person</mat-icon> Profile</button>
+  <button mat-menu-item><mat-icon>settings</mat-icon> Settings</button>
+  <button mat-menu-item><mat-icon>exit_to_app</mat-icon> Logout</button>
+</mat-menu>
+

@@ -10,7 +10,7 @@ export class SignupComponent {
   signupError = false;
   hidePassWord = true;
   hideConfirmPassWord = true;
-  genderOptions = ['Male', 'Female', 'Others'];
+  genderOptions = ['Male', 'Female'];
   signupform: FormGroup;
 
   constructor(){

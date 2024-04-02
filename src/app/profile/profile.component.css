@@ -30,3 +30,7 @@
 .user-name{
   font-family: monospace;
 }
+
+.headline{
+  width: 25em;
+}

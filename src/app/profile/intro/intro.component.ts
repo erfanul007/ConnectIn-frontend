@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { schooldetails } from 'src/models/schooldetails';
-import { userinfo } from 'src/models/userinfo';
-import { workdetails } from 'src/models/workdetails';
+import { Component, Input } from '@angular/core';
+import { schooldetails } from 'src/models/user/schooldetails';
+import { userinfo } from 'src/models/user/userinfo';
+import { userprofile } from 'src/models/user/userprofile';
+import { workdetails } from 'src/models/user/workdetails';
 
 @Component({
   selector: 'app-intro',
@@ -10,6 +11,7 @@ import { workdetails } from 'src/models/workdetails';
 })
 export class IntroComponent {
   userdetails = {} as userinfo;
+  @Input() userheader = {} as userprofile;
   constructor() {
     this.userdetails.bio = 'Amar ei duniay debar kichu nai, ache shudhu bhalobasha dia gelam tai';
     const worked = {} as workdetails;
@@ -33,5 +35,6 @@ export class IntroComponent {
     this.userdetails.school.push(school2)
     this.userdetails.livesin = 'Dhaka, Bangladesh';
     this.userdetails.hometown = 'Cumilla, Bangladesh';
+    this.userdetails.relationship = 'Married';
   }
 }

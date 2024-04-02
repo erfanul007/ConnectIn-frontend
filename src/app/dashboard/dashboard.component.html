@@ -1,0 +1,31 @@
+<mat-card class="margin-bottom" *ngFor="let post of posts">
+  <mat-card-header>
+    <div mat-card-avatar class="post-avatar" routerLink="/profile/{{post.createdby.username}}"
+      [style.backgroundImage]="post.createdby.profilepic ? 'url(' + post.createdby.profilepic + ')' : 'url(../../assets/landing-page-bg.jpg)'">
+    </div>
+    <mat-card-title routerLink="/profile/{{post.createdby.username}}" class="hoverlink">{{post.createdby.fname}} {{post.createdby.lname}}</mat-card-title>
+    <mat-card-subtitle class="subtitle-line">
+      {{ post.createdon | date:'dd/MM/yyyy hh:mm a' }}
+      <mat-icon class="subtitle-icon" *ngIf="post.ispublic">public</mat-icon>
+      <mat-icon class="subtitle-icon" *ngIf="!post.ispublic">group</mat-icon>
+    </mat-card-subtitle>
+  </mat-card-header>
+  <img *ngIf="post.attachment" mat-card-image src="../../assets/landing-page-bg.jpg" class="fit-to-parent margin-bottom">
+  <mat-card-content>
+    {{post.description.length > mxcharperblog && !post.iscollapsed ? post.description.substr(0, mxcharperblog) : post.description}}
+    <span class="collapse-link" *ngIf="post.description.length > mxcharperblog && !post.iscollapsed" (click)="post.iscollapsed = !post.iscollapsed">...see more</span>
+    <span class="collapse-link" *ngIf="post.description.length > mxcharperblog && post.iscollapsed" (click)="post.iscollapsed = !post.iscollapsed">see less</span>
+  </mat-card-content>
+  <mat-card-actions fxLayout="row" fxLayoutAlign="space-around">
+    <button mat-button (click)="post.isreacted= !post.isreacted">
+      <mat-icon *ngIf="post.isreacted">favorite</mat-icon>
+      <mat-icon *ngIf="!post.isreacted">favorite_border</mat-icon>
+      {{post.reacts}} Reacts
+    </button>
+    <button mat-button>
+      <mat-icon>comment</mat-icon> {{post.comments}} Comment</button>
+    <button mat-button [cdkCopyToClipboard]="post.description" (click)="opensnackbar('copied to clipboard')">
+      <mat-icon>share</mat-icon> Share
+    </button>
+  </mat-card-actions>
+</mat-card>

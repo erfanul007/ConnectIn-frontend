@@ -15,6 +15,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin-top: 1em;
 }
 
+.margin-bottom{
+  margin-bottom: 1em;
+}
+
 .padding-inside{
   padding: 2em;
 }
@@ -29,5 +33,5 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .width-common{
-  width: 70%;
+  width: 60%;
 }

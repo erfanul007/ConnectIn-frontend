@@ -1,6 +1,7 @@
 <mat-card fxLayout="column" class="intro-body">
-  <h2>Bio</h2>
+  <h2>About</h2>
   <p>{{userdetails.bio}}</p><hr>
+  <mat-divider></mat-divider>
   <h2>Intro</h2>
   <div *ngFor="let work of userdetails.work">
     <div fxLayout="row">
@@ -21,22 +22,29 @@
       </p>
     </div>
   </div>
-  <div fxLayout="row">
-    <mat-icon class="margin-right">favorite</mat-icon>
-    <p>
-      {{userdetails.relationship}}
-    </p>
-  </div>
-  <div fxLayout="row">
+  <div fxLayout="row" *ngIf="userdetails.livesin">
     <mat-icon class="margin-right">home</mat-icon>
     <p>
       Lives in {{userdetails.livesin}}
     </p>
   </div>
-  <div fxLayout="row">
+  <div fxLayout="row" *ngIf="userdetails.hometown">
     <mat-icon class="margin-right">location_on</mat-icon>
     <p>
       From {{userdetails.hometown}}
+    </p>
+  </div>
+  <div fxLayout="row" *ngIf="userdetails.relationship">
+    <mat-icon class="margin-right">favorite</mat-icon>
+    <p>
+      {{userdetails.relationship}}
+    </p>
+  </div>
+  <div fxLayout="row" *ngIf="userheader.gender">
+    <mat-icon class="margin-right" *ngIf="userheader.gender === 'Male'">male</mat-icon>
+    <mat-icon class="margin-right" *ngIf="userheader.gender === 'Female'">female</mat-icon>
+    <p>
+      {{userheader.gender}}
     </p>
   </div>
 </mat-card>

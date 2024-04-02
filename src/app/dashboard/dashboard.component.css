@@ -1,0 +1,52 @@
+.post-avatar {
+  width: 3.5em;
+  height: 3.5em;
+  background-size: cover;
+  background-position: center;
+  border: 0.25em solid wheat;
+  cursor: pointer;
+}
+
+.subtitle-icon{
+  padding: 0;
+  margin: 0;
+  font-size: 1.5em;
+  margin-left: 0.5em;
+}
+
+.subtitle-line{
+  display: flex;
+  align-items: center;
+}
+
+.flex-center{
+  display: flex;
+  align-items: space-between;
+}
+
+.fit-to-parent {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.hoverlink:hover{
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.collapsed {
+  /* Styles for the collapsed description */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.expanded {
+  /* Styles for the expanded description */
+  white-space: normal;
+}
+
+.collapse-link{
+  cursor: pointer;
+  font-weight:500;
+}

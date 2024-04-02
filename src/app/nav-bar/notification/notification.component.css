@@ -1,0 +1,11 @@
+.notification-wrapper{
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-bottom: 1em;
+}
+
+.notification{
+  border: 0.1em solid black;
+  padding: 1em;
+  margin-top: 1em;
+}

@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
 })
 export class NavBarComponent {
   brandName = 'ConnectIn';
-  loggedIn = false;
+  loggedIn = true;
 }

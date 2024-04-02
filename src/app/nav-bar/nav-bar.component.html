@@ -6,7 +6,8 @@
   <div class="nav-spacer"></div>
   <div *ngIf="loggedIn; then thenBlock else elseBlock"></div>
   <ng-template #thenBlock>
-    <a mat-button>LoggedIn</a>
+    <app-notification></app-notification>
+    <app-user-menu class="margin-left"></app-user-menu>
   </ng-template>
   <ng-template #elseBlock>
     <a mat-raised-button routerLink="login">Login</a>

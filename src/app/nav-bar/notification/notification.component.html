@@ -1,0 +1,6 @@
+<button mat-icon-button [matMenuTriggerFor]="beforeMenu">
+  <mat-icon matBadge="15" matBadgeColor="warn">notifications</mat-icon>
+</button>
+<mat-menu #beforeMenu="matMenu" xPosition="before" class="notification-wrapper">
+  <button class="notification" mat-menu-item *ngFor="let notification of notifications.slice().reverse()">{{notification.description}}</button>
+</mat-menu>
