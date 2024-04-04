@@ -4,5 +4,4 @@ export interface userprofile{
   gender: string;
   followers: number;
   following: number;
-  coverphoto: string|null;
 }

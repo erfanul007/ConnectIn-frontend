@@ -21,6 +21,8 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
+import { AuthserviceService } from './services/authservice.service';
+
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { LandingComponent } from './landing/landing.component';
@@ -32,14 +34,20 @@ import { NotificationComponent } from './nav-bar/notification/notification.compo
 import { UserMenuComponent } from './nav-bar/user-menu/user-menu.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatDividerModule } from '@angular/material/divider';
+import { HomeComponent } from './home/home.component';
+import { ShortprofileComponent } from './home/shortprofile/shortprofile.component';
+import { HttpClientModule } from '@angular/common/http';
+import { SharedataService } from './services/sharedata.service';
 
 const appRoute: Routes = [
   { path: '', component: LandingComponent },
-  { path: 'home', component: LandingComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'profile/:username', component: ProfileComponent },
 ];
+
+export const serverroot = 'http://localhost:3001/';
 
 @NgModule({
   declarations: [
@@ -53,6 +61,8 @@ const appRoute: Routes = [
     NotificationComponent,
     UserMenuComponent,
     DashboardComponent,
+    HomeComponent,
+    ShortprofileComponent,
   ],
   imports: [
     BrowserModule,
@@ -74,8 +84,14 @@ const appRoute: Routes = [
     ClipboardModule,
     MatSnackBarModule,
     MatDividerModule,
+    HttpClientModule,
   ],
-  providers: [DatePipe, MatSnackBar],
+  providers: [
+    DatePipe,
+    MatSnackBar,
+    AuthserviceService,
+    SharedataService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

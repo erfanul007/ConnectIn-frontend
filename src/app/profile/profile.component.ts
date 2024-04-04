@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { userbasic } from 'src/models/user/userbasic';
 import { userprofile } from 'src/models/user/userprofile';
+import { SharedataService } from '../services/sharedata.service';
 
 @Component({
   selector: 'app-profile',
@@ -10,13 +11,14 @@ import { userprofile } from 'src/models/user/userprofile';
 export class ProfileComponent {
   user = {} as userbasic;
   userheader = {} as userprofile;
-  constructor(){
-    this.user.username = 'erfanul007';
-    this.user.fname = 'Md Erfanul Islam';
-    this.user.lname = 'Bhuiyan';
-    this.user.headline = 'Software Engineer | Competive Programmer | Problem Solver'
+  constructor(private sharedata: SharedataService){
+    this.sharedata.getuser.subscribe(user => this.user = user);
     this.userheader.followers = 120;
     this.userheader.following = 78;
     this.userheader.gender = 'Female';
+  }
+
+  updateshareduser(){
+    this.sharedata.setuser(this.user);
   }
 }

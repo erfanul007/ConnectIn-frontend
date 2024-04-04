@@ -1,7 +1,6 @@
 export interface notification{
-  createdon: Date;
+  createdon: string;
   isread: boolean;
   type: string;
   description: string;
-  relatedlink: string;
 }

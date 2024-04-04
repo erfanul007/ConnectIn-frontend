@@ -3,7 +3,7 @@ import { attachment } from "./attachment";
 
 export interface blog{
   createdby: userbasic;
-  createdon: Date;
+  createdon: string;
   heading: string;
   description: string;
   attachment: attachment;

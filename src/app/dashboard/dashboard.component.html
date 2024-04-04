@@ -1,23 +1,25 @@
 <mat-card class="margin-bottom" *ngFor="let post of posts">
   <mat-card-header>
-    <div mat-card-avatar class="post-avatar" routerLink="/profile/{{post.createdby.username}}"
+    <div mat-card-avatar class="post-avatar" (click)="gotoprofile(post.createdby)"
       [style.backgroundImage]="post.createdby.profilepic ? 'url(' + post.createdby.profilepic + ')' : 'url(../../assets/landing-page-bg.jpg)'">
     </div>
-    <mat-card-title routerLink="/profile/{{post.createdby.username}}" class="hoverlink">{{post.createdby.fname}} {{post.createdby.lname}}</mat-card-title>
+    <mat-card-title (click)="gotoprofile(post.createdby)" class="hoverlink">{{post.createdby.fname}} {{post.createdby.lname}}</mat-card-title>
     <mat-card-subtitle class="subtitle-line">
-      {{ post.createdon | date:'dd/MM/yyyy hh:mm a' }}
+      {{ post.createdon }}
       <mat-icon class="subtitle-icon" *ngIf="post.ispublic">public</mat-icon>
       <mat-icon class="subtitle-icon" *ngIf="!post.ispublic">group</mat-icon>
     </mat-card-subtitle>
   </mat-card-header>
-  <img *ngIf="post.attachment" mat-card-image src="../../assets/landing-page-bg.jpg" class="fit-to-parent margin-bottom">
+  <img *ngIf="post.attachment" mat-card-image src="{{post.attachment.link}}" class="fit-to-parent margin-bottom">
   <mat-card-content>
-    {{post.description.length > mxcharperblog && !post.iscollapsed ? post.description.substr(0, mxcharperblog) : post.description}}
-    <span class="collapse-link" *ngIf="post.description.length > mxcharperblog && !post.iscollapsed" (click)="post.iscollapsed = !post.iscollapsed">...see more</span>
-    <span class="collapse-link" *ngIf="post.description.length > mxcharperblog && post.iscollapsed" (click)="post.iscollapsed = !post.iscollapsed">see less</span>
+    <div [class.post-content]="post.iscollapsed" [class.post-content-full]="!post.iscollapsed">
+      <h2 *ngIf="post.heading" class="heading-text">{{post.heading}}</h2>
+      <div [innerHTML]="post.description"></div>
+    </div>
+    <button *ngIf="post.iscollapsed" mat-button class="width-100" (click)="post.iscollapsed=false"><mat-icon>arrow_downward</mat-icon>see full post</button>
   </mat-card-content>
   <mat-card-actions fxLayout="row" fxLayoutAlign="space-around">
-    <button mat-button (click)="post.isreacted= !post.isreacted">
+    <button mat-button (click)="addreaction(post)">
       <mat-icon *ngIf="post.isreacted">favorite</mat-icon>
       <mat-icon *ngIf="!post.isreacted">favorite_border</mat-icon>
       {{post.reacts}} Reacts

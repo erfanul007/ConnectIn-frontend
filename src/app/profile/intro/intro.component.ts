@@ -19,7 +19,7 @@ export class IntroComponent {
     worked.position = 'Software Engineer';
     worked.iscurrent = true;
     this.userdetails.work = [];
-    console.log(this.userdetails);
+    
     this.userdetails.work.push(worked);
     const worked2:workdetails = {...worked};
     worked2.iscurrent = false;

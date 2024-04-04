@@ -1,5 +1,6 @@
 .cover-photo{
   height: 15em;
+  width: 100%;
   object-fit: cover;
   border-left: 0.5em solid wheat;
   border-right: 0.5em solid wheat;

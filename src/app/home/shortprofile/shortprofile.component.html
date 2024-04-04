@@ -1,0 +1,26 @@
+<mat-card fxLayout="column" fxLayoutAlign="start center" class="intro-body">
+  <img
+    src="{{ currentuser.coverphoto }}"
+    onerror="this.onerror=null; this.src='../../assets/landing-page-bg.jpg'"
+    class="cover-photo"
+  />
+  <img
+    src="{{ currentuser.profilepic }}"
+    onerror="this.onerror=null; this.src='../../assets/landing-page-bg.jpg'"
+    class="profile-photo"
+  />
+  <div class="title-center">
+    <mat-card-title>
+      {{ currentuser.fname }} {{ currentuser.lname }}
+    </mat-card-title>
+    <mat-card-subtitle>{{ currentuser.headline }}</mat-card-subtitle>
+  </div>
+  <mat-card-content fxLayout="column" fxLayoutAlign="start center" style="width: 100%;">
+    <button mat-raised-button class="margin-top action-btn" (click)="gotoprofile()">
+      <mat-icon>person</mat-icon> View full proile
+    </button>
+    <button mat-raised-button class="margin-top action-btn" (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon> user another account
+    </button>
+  </mat-card-content>
+</mat-card>

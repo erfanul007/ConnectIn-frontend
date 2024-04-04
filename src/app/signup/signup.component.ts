@@ -30,7 +30,6 @@ export class SignupComponent {
   }
 
   onSubmit(){
-    console.log(this.signupform.value);
     if(this.signupform.valid != true){
       return;
     }

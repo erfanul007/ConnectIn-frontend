@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SharedataService } from '../services/sharedata.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,5 +8,16 @@ import { Component } from '@angular/core';
 })
 export class NavBarComponent {
   brandName = 'ConnectIn';
-  loggedIn = true;
+  loggedIn = false;
+
+  constructor(private sharedata: SharedataService){
+    this.sharedata.getloggedinuser.subscribe((user) => {
+      if(user.username){
+        this.loggedIn = true;
+      }
+      else{
+        this.loggedIn = false;
+      }
+    })
+  }
 }

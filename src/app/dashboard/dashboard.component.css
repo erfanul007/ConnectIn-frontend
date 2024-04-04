@@ -1,10 +1,11 @@
 .post-avatar {
-  width: 3.5em;
-  height: 3.5em;
+  width: 3em;
+  height: 3em;
   background-size: cover;
   background-position: center;
   border: 0.25em solid wheat;
   cursor: pointer;
+  margin-bottom: 0.5em;
 }
 
 .subtitle-icon{
@@ -49,4 +50,22 @@
 .collapse-link{
   cursor: pointer;
   font-weight:500;
+}
+
+.heading-text{
+  line-height: normal;
+  margin-bottom: 0.5em !important;
+}
+
+.post-content{
+  max-height: 10em;
+  overflow: hidden;
+}
+
+.post-content-full{
+  max-height: auto;
+}
+
+.width-100{
+  width: 100%;
 }
