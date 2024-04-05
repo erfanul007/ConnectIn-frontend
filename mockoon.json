@@ -1,0 +1,356 @@
+{
+  "uuid": "508e5ac4-841e-4455-9286-64cc67cb9a75",
+  "lastMigration": 32,
+  "name": "Mockoon (copy)",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3002,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "d2c4b30b-3180-4946-b160-616322f453a0",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "",
+      "responses": [
+        {
+          "uuid": "d63f049e-cb02-44f4-bc42-54b2fc5dc798",
+          "body": "{\n  \"Status\": \"Success\"\n}",
+          "latency": 200,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "94f92e6d-c97e-4dde-9136-f4c24fbc190c",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "blogs",
+      "responses": [
+        {
+          "uuid": "c8491403-b5d6-47ad-ade6-4db3525aca4b",
+          "body": "[\n  {{#repeat (queryParam 'count' 20)}}\n    {\n      \"createdby\": {\n        \"username\": \"{{faker 'internet.userName'}}\",\n        \"fname\": \"{{faker 'person.firstName'}}\",\n        \"lname\": \"{{faker 'person.lastName'}}\",\n        \"headline\": \"{{faker 'lorem.sentence'}}\",\n        \"profilepic\": \"\",\n        \"coverpic\": \"\"\n      },\n      \"createdon\": \"{{date '2024-01-01' '2024-03-07' 'MM/dd/yyyy hh:mma'}}\",\n      \"heading\": \"{{faker 'lorem.sentence'}}\",\n      \"description\": \"{{#repeat (faker 'number.int' min=5 max=20) comma=false}}<p>{{faker 'lorem.paragraph'}}</p>{{/repeat}}\",\n      \"comments\": {{faker 'number.int' 100}},\n      \"reacts\": {{faker 'number.int' 500}},\n      \"ispublic\": {{#if (header 'Username')}}{{faker 'datatype.boolean'}}{{else}}true{{/if}},\n      \"isreacted\": {{#if (header 'Username')}}{{faker 'datatype.boolean'}}{{else}}false{{/if}},\n      \"iscollapsed\": true,\n      \"iscommentopen\": false\n    }\n  {{/repeat}}\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "630a9983-cff0-4350-aca6-9d0193c466bd",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "comments",
+      "responses": [
+        {
+          "uuid": "318a7532-ec8b-4858-a006-bf1378533e9d",
+          "body": "[\n  {{#repeat (queryParam 'count' 3)}}\n    {\n      \"createdby\": {\n        \"username\": \"{{faker 'internet.userName'}}\",\n        \"fname\": \"{{faker 'person.firstName'}}\",\n        \"lname\": \"{{faker 'person.lastName'}}\",\n        \"headline\": \"{{faker 'lorem.paragraph'}}\",\n        \"profilepic\": \"\",\n        \"coverpic\": \"\"\n      },\n      \"createdon\": \"{{date '2024-01-01' '2024-03-07' 'MM/dd/yyyy hh:mma'}}\",\n      \"message\": \"{{faker 'lorem.sentence'}}\",\n      \"reactions\": {{faker 'number.int' 50}},\n      \"isreacted\": {{#if (header 'Username')}}{{faker 'datatype.boolean'}}{{else}}false{{/if}}\n    }\n  {{/repeat}}\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "f567ce1c-9274-467e-b041-788858f9cf39",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "user-blogs",
+      "responses": [
+        {
+          "uuid": "d5727390-07e4-4b96-bef5-863e1ecf6882",
+          "body": "[\n  {{#repeat (queryParam 'count' 10)}}\n    {\n      \"createdby\": {\n        \"username\": \"{{body 'username'}}\",\n        \"fname\": \"{{body 'fname'}}\",\n        \"lname\": \"{{body 'lname'}}\",\n        \"headline\": \"{{body 'headline'}}\",\n        \"profilepic\": \"{{body 'profilepic'}}\",\n        \"coverpic\": \"{{body 'coverpic'}}\"\n      },\n      \"createdon\": \"{{date '2024-01-01' '2024-03-07' 'MM/dd/yyyy hh:mma'}}\",\n      \"heading\": \"{{faker 'lorem.sentence'}}\",\n      \"description\": \"{{#repeat (faker 'number.int' min=5 max=10) comma=false}}<p>{{faker 'lorem.paragraph'}}</p>{{/repeat}}\",\n      \"comments\": {{faker 'number.int' 100}},\n      \"reacts\": {{faker 'number.int' 500}},\n      \"ispublic\": {{#if (header 'Username')}}{{faker 'datatype.boolean'}}{{else}}true{{/if}},\n      \"isreacted\": {{#if (header 'Username')}}{{faker 'datatype.boolean'}}{{else}}false{{/if}},\n      \"iscollapsed\": true,\n      \"iscommentopen\": false\n    }\n  {{/repeat}}\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "053c8d8c-a0d5-4d65-8ce1-2e02938f5dbe",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "profile",
+      "responses": [
+        {
+          "uuid": "4c6e3cff-3db4-49ae-b539-4c4d0a08e718",
+          "body": "{\n  \"username\": \"{{queryParam 'username'}}\",\n  \"fname\": \"{{faker 'person.firstName'}}\",\n  \"lname\": \"{{faker 'person.lastName'}}\",\n  \"headline\": \"{{faker 'lorem.sentence'}}\",\n  \"profilepic\": \"\",\n  \"coverpic\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "ae3ca62d-3fdc-4675-8199-6203737f25e0",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "login",
+      "responses": [
+        {
+          "uuid": "614552d0-fd81-481b-a6a9-141aafad7f1f",
+          "body": "{\n  \"username\": \"{{body 'username'}}\",\n  \"fname\": \"{{faker 'person.firstName'}}\",\n  \"lname\": \"{{faker 'person.lastName'}}\",\n  \"headline\": \"{{faker 'lorem.sentence'}}\",\n  \"profilepic\": \"\",\n  \"coverpic\": \"\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "c8f1b93b-c0ce-4af2-a5e2-bff3e21244ff",
+      "type": "http",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "signup",
+      "responses": [
+        {
+          "uuid": "3fb78dfd-b1da-4ae4-b32e-bb98c14c13a7",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "ab0dba9a-07b7-44f6-9838-18ab60f12348",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "user-header",
+      "responses": [
+        {
+          "uuid": "f6940ab5-beb3-47c6-8357-b57c352ff3f6",
+          "body": "{\n  \"email\": \"{{faker 'internet.email'}}\",\n  \"dateofbirth\": \"{{date '1955-01-01' '2015-01-01' 'MM/dd/yyyy'}}\",\n  \"gender\": \"{{oneOf (array 'Male' 'Female')}}\",\n  \"followers\": {{faker 'number.int' 1000}},\n  \"following\": {{faker 'number.int' 1000}},\n  \"isfollowing\": false\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    },
+    {
+      "uuid": "d35fb61b-5303-4250-b66f-2cf21e924393",
+      "type": "http",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "user-info",
+      "responses": [
+        {
+          "uuid": "60132ee0-b976-4d36-a38c-a4321d1f879f",
+          "body": "{\n  \"bio\": \"{{faker 'lorem.paragraph'}}\",\n  \"livesin\": \"{{faker 'location.city'}}, {{faker 'location.country'}}\",\n  \"hometown\": \"{{faker 'location.city'}}, {{faker 'location.country'}}\",\n  \"relationship\": \"{{oneOf (array 'Married' 'Single')}}\",\n  \"work\": [{\n    \"position\": \"{{oneOf (array 'Software Engineer' 'Intern' 'Team Lead' 'Senior Software Engineer')}}\",\n    \"company\": \"{{company}}\",\n    \"started\": \"{{date '2000-01-01' '2024-04-04' 'MM/dd/yyyy hh:mma'}}\",\n    \"ended\": \"{{date '2020-01-01' '2024-04-04' 'MM/dd/yyyy hh:mma'}}\",\n    \"iscurrent\": {{faker 'datatype.boolean'}},\n    \"description\": \"{{faker 'lorem.paragraph'}}\"\n  }],\n  \"school\": [{\n    \"institute\": \"{{company}}\",\n    \"degree\": \"{{oneOf (array 'BSc' 'BA' 'MBA' 'HSC')}}\",\n    \"major\": \"{{oneOf (array 'CSE' 'Civil' 'Science' 'English')}}\",\n    \"started\": \"{{date '2010-01-01' '2024-04-04' 'MM/dd/yyyy hh:mma'}}\",\n    \"ended\": \"{{date '2020-01-01' '2024-04-04' 'MM/dd/yyyy hh:mma'}}\",\n    \"iscurrent\": {{faker 'datatype.boolean'}},\n    \"description\": \"{{faker 'lorem.paragraph'}}\"\n  }]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "d2c4b30b-3180-4946-b160-616322f453a0"
+    },
+    {
+      "type": "route",
+      "uuid": "94f92e6d-c97e-4dde-9136-f4c24fbc190c"
+    },
+    {
+      "type": "route",
+      "uuid": "630a9983-cff0-4350-aca6-9d0193c466bd"
+    },
+    {
+      "type": "route",
+      "uuid": "f567ce1c-9274-467e-b041-788858f9cf39"
+    },
+    {
+      "type": "route",
+      "uuid": "053c8d8c-a0d5-4d65-8ce1-2e02938f5dbe"
+    },
+    {
+      "type": "route",
+      "uuid": "ae3ca62d-3fdc-4675-8199-6203737f25e0"
+    },
+    {
+      "type": "route",
+      "uuid": "c8f1b93b-c0ce-4af2-a5e2-bff3e21244ff"
+    },
+    {
+      "type": "route",
+      "uuid": "ab0dba9a-07b7-44f6-9838-18ab60f12348"
+    },
+    {
+      "type": "route",
+      "uuid": "d35fb61b-5303-4250-b66f-2cf21e924393"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [
+    {
+      "uuid": "1f1b1858-e33f-41d2-944b-0d709016e8f3",
+      "id": "9ry3",
+      "name": "New data",
+      "documentation": "",
+      "value": ""
+    }
+  ],
+  "callbacks": []
+}
