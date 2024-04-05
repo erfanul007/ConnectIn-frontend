@@ -9,26 +9,23 @@ import { notification } from 'src/models/notification/notification';
 })
 export class NotificationComponent {
   notifications = [] as notification[];
-  newnotification = 10;
+  newnotification = 0;
 
   constructor(private sharedata: SharedataService) {
     this.sharedata.getnotification.subscribe((noti) => {
-      if(noti.description){
+      if(noti.message){
         this.notifications.push(noti);
         this.newnotification = this.newnotification + 1;
       }
     });
     const notification = {} as notification;
-    notification.type = 'success';
     notification.createdon = '4/4/2024 3:48 PM';
     notification.isread = false;
-    notification.description = 'Demo for new post is update';
+    notification.message = 'Demo for new post is update';
     this.sharedata.setnotification(notification);
     const noti2 = {...notification};
+    noti2.message = 'Demo for new comment is updated'
     this.sharedata.setnotification(noti2);
-    const noti3 = {...notification};
-    noti3.type = 'warning';
-    this.sharedata.setnotification(noti3);
   }
 
   markasread($event:any, notification: notification) {

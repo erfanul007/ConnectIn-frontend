@@ -15,8 +15,11 @@ import { AuthserviceService } from '../services/authservice.service';
 export class LoginComponent {
   loginform: FormGroup;
   hidePassWord = true;
-  loginError = false;
-  constructor(private http:HttpClient, private sharedata: SharedataService, private router: Router, private authservice: AuthserviceService) {
+  loginstatus = '';
+  signupstatus = '';
+  constructor(private sharedata: SharedataService, private authservice: AuthserviceService) {
+    this.sharedata.getloginresponse.subscribe(resp => this.loginstatus = resp);
+    this.sharedata.getregisterresponose.subscribe(resp => this.signupstatus = resp);
     this.loginform = new FormGroup({
       username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required])
@@ -27,8 +30,6 @@ export class LoginComponent {
     if(this.loginform.valid != true){
       return;
     }
-    if(this.authservice.login(this.loginform.value.username, this.loginform.value.password)){
-      this.loginError = true;
-    }
+    this.authservice.login(this.loginform.value.username, this.loginform.value.password)
   }
 }

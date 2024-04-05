@@ -13,7 +13,8 @@
     <mat-card-title>
       {{ currentuser.fname }} {{ currentuser.lname }}
     </mat-card-title>
-    <mat-card-subtitle>{{ currentuser.headline }}</mat-card-subtitle>
+    <p class="user-name">@{{ currentuser.username }}</p>
+    <p class="headline">{{ currentuser.headline }}</p>
   </div>
   <mat-card-content fxLayout="column" fxLayoutAlign="start center" style="width: 100%;">
     <button mat-raised-button class="margin-top action-btn" (click)="gotoprofile()">

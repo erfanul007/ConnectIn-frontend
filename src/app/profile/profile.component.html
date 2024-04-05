@@ -17,7 +17,9 @@
         </div>
       </div>
       <div fxLayout="row" fxLayoutAlign="end">
-        <button mat-raised-button color="accent">{{userheader.followers}} followers <mat-icon>people</mat-icon></button>
+        <button mat-stroked-button *ngIf="loggedinuser.username && !userheader.isfollowing" (click)="addfollow()"><mat-icon>add</mat-icon>follow</button>
+        <button mat-raised-button color="primary" *ngIf="loggedinuser && userheader.isfollowing" (click)="removefollow()"><mat-icon>check</mat-icon>following</button>
+        <button mat-raised-button color="accent" class="margin-left-s">{{userheader.followers}} followers <mat-icon>people</mat-icon></button>
         <button mat-raised-button class="margin-left-s" color="warn">{{userheader.following}} following <mat-icon>people_outline</mat-icon></button>
       </div>
     </div>

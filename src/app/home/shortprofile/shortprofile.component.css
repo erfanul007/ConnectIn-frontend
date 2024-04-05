@@ -23,3 +23,15 @@
 .action-btn{
   width: 100%;
 }
+
+.user-name{
+  font-family: monospace;
+}
+
+.intro-body{
+  position:sticky;
+}
+
+headline{
+  color: gray;
+}

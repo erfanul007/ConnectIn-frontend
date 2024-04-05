@@ -16,9 +16,16 @@ export class DashboardComponent {
   posts = [] as blog[];
   mxcharperblog = 280;
   user = {} as userbasic;
+  currentuser = {} as userbasic;
   constructor(private snackbar: MatSnackBar, private http: HttpClient, private sharedata: SharedataService, private router: Router){
-    this.sharedata.getuser.subscribe(user => this.user = user);
-    this.getPosts();
+    this.gethomepost();
+    this.sharedata.getloggedinuser.subscribe(user => this.currentuser = user);
+    this.sharedata.getuser.subscribe(user =>{
+      if(user.username){
+        this.user = user;
+        this.getprofilepost();
+      }
+    });
   }
 
   opensnackbar(message: string){
@@ -27,29 +34,49 @@ export class DashboardComponent {
     });
   }
 
-  getPosts(){
+  getprofilepost(){
+    const apiurl = serverroot + 'user-blogs' + '?count=20';
+    this.http.post<blog[]>(apiurl, this.user).subscribe({
+      next: (response) => {
+        this.posts = response;
+      }
+    });
+  }
+
+  getmoreposts(){
     if(this.user.username){
-      const apiurl = serverroot + 'user-blogs';
-      this.http.post<blog[]>(apiurl, this.user).subscribe({
-        next: (response) => {
-          this.posts.push(...response);
-        },
-        error: (error) => {
-          console.log(error);
-        }
-      });
+      this.getmoreprofilepost();
     }
     else{
-      const apiurl = serverroot + 'blogs';
-      this.http.get<blog[]>(apiurl).subscribe({
-        next: (response) => {
-          this.posts.push(...response);
-        },
-        error: (error) => {
-          console.log(error);
-        }
-      });
+      this.getmorehomepost();
     }
+  }
+
+  getmoreprofilepost(){
+    const apiurl = serverroot + 'user-blogs' + '?count=10';
+    this.http.post<blog[]>(apiurl, this.user).subscribe({
+      next: (response) => {
+        this.posts.push(...response);
+      }
+    });
+  }
+
+  gethomepost(){
+    const apiurl = serverroot + 'blogs' + '?count=50';
+    this.http.get<blog[]>(apiurl).subscribe({
+      next: (response) => {
+        this.posts = response;
+      }
+    });
+  }
+
+  getmorehomepost(){
+    const apiurl = serverroot + 'blogs' + '?count=20';
+    this.http.get<blog[]>(apiurl).subscribe({
+      next: (response) => {
+        this.posts.push(...response);
+      }
+    });
   }
 
   gotoprofile(user: userbasic){
@@ -58,15 +85,31 @@ export class DashboardComponent {
   }
 
   addreaction(blog:blog){
-    if(blog.isreacted){
-      blog.isreacted = false;
-      blog.reacts = blog.reacts - 1;
-      // add the http call to save reaction removing
+    if(this.currentuser.username){
+      if(blog.isreacted){
+        blog.isreacted = false;
+        blog.reacts = blog.reacts - 1;
+        // add the http call to save reaction removing
+      }
+      else{
+        blog.isreacted = true;
+        blog.reacts = blog.reacts + 1;
+        // add the http call to save reaction adding
+      }
     }
     else{
-      blog.isreacted = true;
-      blog.reacts = blog.reacts + 1;
-      // add the http call to save reaction adding
+      const message = 'You must log in to react';
+      this.snackbar.open(message, 'Close', {
+        duration: 1000
+      });
     }
+  }
+
+  filterprivate(posts: blog[]): blog[]{
+    if(!this.currentuser.username){
+      console.log(posts);
+      return posts.filter(blog => blog.ispublic);
+    }
+    return posts;
   }
 }

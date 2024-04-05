@@ -63,7 +63,8 @@
         <mat-form-field class="input-field">
           <mat-label>Gender</mat-label>
           <mat-select formControlName="gender">
-            <mat-option *ngFor="let gender of genderOptions" [value]="gender">{{ gender }}</mat-option>
+            <mat-option value="Male"><mat-icon>male</mat-icon>Male</mat-option>
+            <mat-option value="Female"><mat-icon>female</mat-icon>Female</mat-option>
           </mat-select>
           <mat-error *ngIf="signupform.get('gender')?.errors?.['required']">
             gender is required
@@ -101,7 +102,7 @@
         </mat-form-field>
       </div>
       <div fxLayoutAlign="center" fxLayout="column">
-        <mat-error *ngIf="signupError" fxLayoutAlign="center">Account already exist!</mat-error>
+        <mat-error *ngIf="signupstatus==='error'" fxLayoutAlign="center">Account already exist!</mat-error>
         <button type="submit" mat-raised-button color="accent" class="margin-top" >Signup</button>
         <div class="margin-top" fxLayoutAlign="center center">
           Already have an account? <button mat-button routerLink="/login" class="link" color="primary">Login</button>

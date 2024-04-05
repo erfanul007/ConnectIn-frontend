@@ -1,4 +1,4 @@
-<mat-card class="margin-bottom" *ngFor="let post of posts">
+<mat-card class="margin-bottom" *ngFor="let post of filterprivate(posts)">
   <mat-card-header>
     <div mat-card-avatar class="post-avatar" (click)="gotoprofile(post.createdby)"
       [style.backgroundImage]="post.createdby.profilepic ? 'url(' + post.createdby.profilepic + ')' : 'url(../../assets/landing-page-bg.jpg)'">
@@ -31,3 +31,4 @@
     </button>
   </mat-card-actions>
 </mat-card>
+<button mat-button class="width-100" (click)="getmoreposts()"><mat-icon>arrow_downward</mat-icon>load more posts</button>

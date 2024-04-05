@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { notification } from 'src/models/notification/notification';
+import { responsestatus } from 'src/models/observable/responsestatus';
+import { registeruser } from 'src/models/user/registeruser';
 import { userbasic } from 'src/models/user/userbasic';
 
 @Injectable({
@@ -10,10 +12,16 @@ export class SharedataService {
   private user = new BehaviorSubject({} as userbasic);
   private notification = new BehaviorSubject({} as notification);
   private loggeinuser = new BehaviorSubject({} as userbasic);
+  private newuser = new BehaviorSubject({} as registeruser);
+  private loginresponose = new BehaviorSubject('');
+  private registerresponose = new BehaviorSubject('');
 
   getuser = this.user.asObservable();
   getnotification = this.notification.asObservable();
   getloggedinuser = this.loggeinuser.asObservable();
+  getnewuser = this.newuser.asObservable();
+  getloginresponse = this.loginresponose.asObservable();
+  getregisterresponose = this.registerresponose.asObservable();
 
   constructor() { }
 
@@ -25,7 +33,19 @@ export class SharedataService {
     this.notification.next(notification);
   }
 
-  setloggedinUser(user: userbasic){
+  setloggedinuser(user: userbasic){
     this.loggeinuser.next(user);
+  }
+
+  setnewuser(user: registeruser){
+    this.newuser.next(user);
+  }
+
+  setloginresponse(responose: string){
+    this.loginresponose.next(responose);
+  }
+
+  setregisterresponse(responose: string){
+    this.registerresponose.next(responose);
   }
 }

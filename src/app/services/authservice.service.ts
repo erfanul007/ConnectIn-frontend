@@ -4,18 +4,37 @@ import { serverroot } from '../app.module';
 import { userbasic } from 'src/models/user/userbasic';
 import { HttpClient } from '@angular/common/http';
 import { SharedataService } from './sharedata.service';
+import { registeruser } from 'src/models/user/registeruser';
+import { responsestatus } from 'src/models/observable/responsestatus';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthserviceService {
+  newuser = {} as registeruser;
+  constructor(private router: Router, private http: HttpClient, private sharedata: SharedataService) {
+    this.sharedata.getnewuser.subscribe(user => this.newuser = user);
+  }
 
-  constructor(private router: Router, private http: HttpClient, private sharedata: SharedataService) { }
-
-  login(username: string, password: string): boolean {
+  login(username: string, password: string) {
+    // to check wrong login force error
     if(username.includes('hacker') || password.includes('hack')){
-      return false;
+      this.sharedata.setloginresponse('error');
+      return;
     }
+    // to login after register as no server there to store data
+    if(this.newuser.username && this.newuser.username === username && this.newuser.password === password){
+      const loggedinuser = {} as userbasic;
+      loggedinuser.username = this.newuser.username;
+      loggedinuser.fname = this.newuser.fname;
+      loggedinuser.lname = this.newuser.lname;
+      this.sharedata.setloggedinuser(loggedinuser);
+      this.router.navigate(['/home']);
+      this.sharedata.setloginresponse('success');
+      return;
+    }
+
+    //server logics
     const apiurl = serverroot + 'login';
     const data = {
       username: username,
@@ -23,15 +42,39 @@ export class AuthserviceService {
     }
     this.http.post<userbasic>(apiurl, data).subscribe({
       next: (response) => {
-        this.sharedata.setloggedinUser(response);
+        this.sharedata.setloggedinuser(response);
         this.router.navigate(['/home']);
+        this.sharedata.setloginresponse('');
+        this.sharedata.setregisterresponse('');
+      },
+      error: (response) => {
+        this.sharedata.setloginresponse('error');
       }
     });
-    return false;
+    return true;
   }
 
   logout() {
-    this.sharedata.setloggedinUser({} as userbasic);
+    this.sharedata.setloggedinuser({} as userbasic);
     this.router.navigate(['/login']);
+  }
+
+  register(newuser: registeruser){
+    if(newuser.username.includes('hacker') || newuser.password.includes('hack')){
+      this.sharedata.setregisterresponse('error');
+      return;
+    }
+    const apiurl = serverroot + 'signup';
+    this.http.post(apiurl, newuser).subscribe({
+      next: () => {
+        this.sharedata.setnewuser(newuser);
+        this.router.navigate(['/login']);
+        this.sharedata.setregisterresponse('success');
+        this.sharedata.setloginresponse('');
+      },
+      error: (response) => {
+        this.sharedata.setregisterresponse('error');
+      }
+    });
   }
 }

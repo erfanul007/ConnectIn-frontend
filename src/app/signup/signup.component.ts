@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AuthserviceService } from '../services/authservice.service';
+import { SharedataService } from '../services/sharedata.service';
+import { registeruser } from 'src/models/user/registeruser';
 
 @Component({
   selector: 'app-signup',
@@ -7,13 +10,14 @@ import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
-  signupError = false;
+  signupstatus = '';
   hidePassWord = true;
   hideConfirmPassWord = true;
   genderOptions = ['Male', 'Female'];
   signupform: FormGroup;
 
-  constructor(){
+  constructor(private authservice: AuthserviceService, private sharedata: SharedataService){
+    this.sharedata.getregisterresponose.subscribe(resp => this.signupstatus = resp);
     this.signupform = new FormGroup({
       firstname: new FormControl('', [Validators.required]),
       lastname: new FormControl('', [Validators.required]),
@@ -33,13 +37,17 @@ export class SignupComponent {
     if(this.signupform.valid != true){
       return;
     }
-    const firstname = this.signupform.value.firstname;
-    const lastname = this.signupform.value.lastname;
-    const email = this.signupform.value.email;
-    const username = this.signupform.value.username;
-    const dateofbirth = this.signupform.value.dateofbirth;
-    const gender = this.signupform.value.gender;
-    const password = this.signupform.value.password;
+    const newuser: registeruser = {
+      fname: this.signupform.value.firstname,
+      lname: this.signupform.value.lastname,
+      email: this.signupform.value.email,
+      username: this.signupform.value.username,
+      dateofbirth: this.signupform.value.dateofbirth.toLocaleString(),
+      gender: this.signupform.value.gender,
+      password: this.signupform.value.password,
+      repeatpassword: this.signupform.value.repeatpassword
+    }
+    this.authservice.register(newuser);
   }
 
   matchPassword(): ValidatorFn{

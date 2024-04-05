@@ -36,8 +36,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatDividerModule } from '@angular/material/divider';
 import { HomeComponent } from './home/home.component';
 import { ShortprofileComponent } from './home/shortprofile/shortprofile.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SharedataService } from './services/sharedata.service';
+import { HttpheaderInterceptor } from './interceptor/httpheader.interceptor';
 
 const appRoute: Routes = [
   { path: '', component: LandingComponent },
@@ -91,6 +92,9 @@ export const serverroot = 'http://localhost:3001/';
     MatSnackBar,
     AuthserviceService,
     SharedataService,
+    {
+      provide: HTTP_INTERCEPTORS, useClass: HttpheaderInterceptor, multi: true
+    }
   ],
   bootstrap: [AppComponent],
 })

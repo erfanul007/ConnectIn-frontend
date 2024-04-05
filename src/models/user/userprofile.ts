@@ -4,4 +4,5 @@ export interface userprofile{
   gender: string;
   followers: number;
   following: number;
+  isfollowing: boolean;
 }
