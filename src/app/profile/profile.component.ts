@@ -14,20 +14,16 @@ import { Router } from '@angular/router';
 export class ProfileComponent {
   user = {} as userbasic;
   userheader = {} as userprofile;
-  isloggedin = true;
   loggedinuser = {} as userbasic;
   constructor(private http: HttpClient, private sharedata: SharedataService, private router: Router){
     this.sharedata.getloggedinuser.subscribe(user => this.loggedinuser = user);
     this.sharedata.getuser.subscribe(user =>{
-      if(user.username){
-        this.user = user;
-      }
-      else{
-        const username:string = this.router.url.split('/')[2];
-        console.log(username);
-        this.getnewuserprofile(username);
-      }
+      this.user = user;
     });
+    if(!this.user.username){
+      const username:string = this.router.url.split('/')[2];
+      this.getnewuserprofile(username);
+    }
     this.getuserinfo();
   }
 

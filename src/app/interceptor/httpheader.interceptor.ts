@@ -17,7 +17,6 @@ export class HttpheaderInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    console.log(request);
     if(this.loggedinuser.username){
       const authReq = request.clone({ setHeaders: { Authorization: this.loggedinuser.username } });
       return next.handle(authReq);

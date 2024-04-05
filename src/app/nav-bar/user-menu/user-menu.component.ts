@@ -10,10 +10,10 @@ import { userbasic } from 'src/models/user/userbasic';
   styleUrls: ['./user-menu.component.css'],
 })
 export class UserMenuComponent {
-  user = {} as userbasic;
+  currentuser = {} as userbasic;
   constructor(private router: Router, private authservice: AuthserviceService, private sharedata: SharedataService){
     this.sharedata.getloggedinuser.subscribe((user)=>{
-      this.user = user;
+      this.currentuser = user;
     });
   }
 
@@ -22,7 +22,7 @@ export class UserMenuComponent {
   }
 
   gotoprofile(){
-    this.sharedata.setuser(this.user);
-    this.router.navigate(['/profile/' + this.user.username]);
+    this.sharedata.setuser(this.currentuser);
+    this.router.navigate(['/profile/' + this.currentuser.username]);
   }
 }

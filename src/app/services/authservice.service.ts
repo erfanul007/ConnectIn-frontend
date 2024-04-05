@@ -5,7 +5,6 @@ import { userbasic } from 'src/models/user/userbasic';
 import { HttpClient } from '@angular/common/http';
 import { SharedataService } from './sharedata.service';
 import { registeruser } from 'src/models/user/registeruser';
-import { responsestatus } from 'src/models/observable/responsestatus';
 
 @Injectable({
   providedIn: 'root'
@@ -29,8 +28,8 @@ export class AuthserviceService {
       loggedinuser.fname = this.newuser.fname;
       loggedinuser.lname = this.newuser.lname;
       this.sharedata.setloggedinuser(loggedinuser);
-      this.router.navigate(['/home']);
       this.sharedata.setloginresponse('success');
+      this.router.navigate(['/home']);
       return;
     }
 
@@ -43,9 +42,9 @@ export class AuthserviceService {
     this.http.post<userbasic>(apiurl, data).subscribe({
       next: (response) => {
         this.sharedata.setloggedinuser(response);
-        this.router.navigate(['/home']);
         this.sharedata.setloginresponse('');
         this.sharedata.setregisterresponse('');
+        this.router.navigate(['/home']);
       },
       error: (response) => {
         this.sharedata.setloginresponse('error');
@@ -56,6 +55,7 @@ export class AuthserviceService {
 
   logout() {
     this.sharedata.setloggedinuser({} as userbasic);
+    this.sharedata.setuser({} as userbasic);
     this.router.navigate(['/login']);
   }
 
@@ -68,9 +68,9 @@ export class AuthserviceService {
     this.http.post(apiurl, newuser).subscribe({
       next: () => {
         this.sharedata.setnewuser(newuser);
-        this.router.navigate(['/login']);
         this.sharedata.setregisterresponse('success');
         this.sharedata.setloginresponse('');
+        this.router.navigate(['/login']);
       },
       error: (response) => {
         this.sharedata.setregisterresponse('error');

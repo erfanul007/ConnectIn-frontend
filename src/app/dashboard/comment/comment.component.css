@@ -1,0 +1,29 @@
+.flex-align{
+  display: flex;
+  align-items: center;
+}
+
+.create-comment{
+  padding: 1em;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.comment-avatar{
+  width: 2em;
+  height: 2em;
+  background-size: cover;
+  background-position: center;
+  border: 0.25em solid wheat;
+  cursor: pointer;
+  margin-bottom: 0.5em;
+}
+
+.text-size{
+  font-size: medium;
+}
+
+.comment-width{
+  max-width: 80%;
+  padding-left: 2em;
+}

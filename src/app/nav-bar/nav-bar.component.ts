@@ -20,4 +20,7 @@ export class NavBarComponent {
       }
     })
   }
+  search(query: string) {
+    
+  }
 }

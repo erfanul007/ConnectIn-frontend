@@ -39,6 +39,12 @@ import { ShortprofileComponent } from './home/shortprofile/shortprofile.componen
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SharedataService } from './services/sharedata.service';
 import { HttpheaderInterceptor } from './interceptor/httpheader.interceptor';
+import { CreatepostComponent } from './dashboard/createpost/createpost.component';
+import { TextFieldModule } from '@angular/cdk/text-field';
+import { CommentComponent } from './dashboard/comment/comment.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatRadioModule} from '@angular/material/radio';
+
 
 const appRoute: Routes = [
   { path: '', component: LandingComponent },
@@ -64,6 +70,8 @@ export const serverroot = 'http://localhost:3001/';
     DashboardComponent,
     HomeComponent,
     ShortprofileComponent,
+    CreatepostComponent,
+    CommentComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,6 +94,10 @@ export const serverroot = 'http://localhost:3001/';
     MatSnackBarModule,
     MatDividerModule,
     HttpClientModule,
+    TextFieldModule,
+    MatSlideToggleModule,
+    MatFormFieldModule,
+    MatRadioModule
   ],
   providers: [
     DatePipe,

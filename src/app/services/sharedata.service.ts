@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { blog } from 'src/models/blog/blog';
 import { notification } from 'src/models/notification/notification';
 import { responsestatus } from 'src/models/observable/responsestatus';
 import { registeruser } from 'src/models/user/registeruser';
@@ -15,6 +16,7 @@ export class SharedataService {
   private newuser = new BehaviorSubject({} as registeruser);
   private loginresponose = new BehaviorSubject('');
   private registerresponose = new BehaviorSubject('');
+  private createnewblog = new BehaviorSubject({} as blog);
 
   getuser = this.user.asObservable();
   getnotification = this.notification.asObservable();
@@ -22,6 +24,7 @@ export class SharedataService {
   getnewuser = this.newuser.asObservable();
   getloginresponse = this.loginresponose.asObservable();
   getregisterresponose = this.registerresponose.asObservable();
+  getcreatenewblog = this.createnewblog.asObservable();
 
   constructor() { }
 
@@ -47,5 +50,9 @@ export class SharedataService {
 
   setregisterresponse(responose: string){
     this.registerresponose.next(responose);
+  }
+
+  setcreatenewblog(blog: blog){
+    this.createnewblog.next(blog);
   }
 }

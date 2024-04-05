@@ -2,11 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { serverroot } from 'src/app/app.module';
 import { SharedataService } from 'src/app/services/sharedata.service';
-import { schooldetails } from 'src/models/user/schooldetails';
 import { userbasic } from 'src/models/user/userbasic';
 import { userinfo } from 'src/models/user/userinfo';
 import { userprofile } from 'src/models/user/userprofile';
-import { workdetails } from 'src/models/user/workdetails';
 
 @Component({
   selector: 'app-intro',
@@ -19,8 +17,8 @@ export class IntroComponent {
   @Input() userheader = {} as userprofile;
   constructor(private http: HttpClient, private sharedata: SharedataService) {
     this.sharedata.getuser.subscribe(user =>{
+      this.user = user;
       if(user.username){
-        this.user = user;
         this.getuserinfo(user.username);
       }
     });

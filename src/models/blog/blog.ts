@@ -12,4 +12,5 @@ export interface blog{
   ispublic: boolean;
   isreacted: boolean;
   iscollapsed: boolean;
+  iscommentopen: boolean;
 }

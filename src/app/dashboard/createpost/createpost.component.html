@@ -1,0 +1,49 @@
+<mat-card class="margin-bottom">
+  <form
+    (ngSubmit)="onSubmit()"
+    name="loginform"
+    [formGroup]="postformgroup"
+    fxLayoutAlign="stretch"
+    fxLayout="column"
+    class="padding-inside"
+  >
+    <mat-form-field appearance="fill">
+      <mat-label>Whats on your mind?</mat-label>
+      <textarea
+        matInput
+        cdkAutosizeMinRows="3"
+        cdkAutosizeMaxRows="10"
+        formControlName="description"
+      >
+      </textarea>
+    </mat-form-field>
+    <div fxFlex="row" fxLayoutAlign="space-between center">
+        <!-- <mat-label>Privacy</mat-label>
+        <mat-select formControlName="privacy">
+          <mat-option value="public"
+            ><mat-icon>public</mat-icon>Public</mat-option
+          >
+          <mat-option value="connections"
+            ><mat-icon>group</mat-icon>Connections</mat-option
+          >
+        </mat-select> -->
+      <div>
+        <button
+          type="button"
+          mat-stroked-button
+          [matMenuTriggerFor]="beforeMenu">
+          Privacy
+          <mat-icon *ngIf="ispublic">public</mat-icon>
+          <mat-icon *ngIf="!ispublic">group</mat-icon>
+        </button>
+        <mat-menu #beforeMenu="matMenu" xPosition="before">
+          <button class="notification" mat-menu-item (click)="ispublic = true">Public <mat-icon>public</mat-icon></button>
+          <button class="notification" mat-menu-item (click)="ispublic = false">Connections <mat-icon>group</mat-icon></button>
+        </mat-menu>
+      </div>
+      <button type="submit" mat-stroked-button color="primary">
+        <mat-icon>send</mat-icon>Share Post
+      </button>
+    </div>
+  </form>
+</mat-card>
